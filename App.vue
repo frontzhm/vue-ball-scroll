@@ -1,9 +1,7 @@
 <template lang="pug">
     //- npm i pug-plain-loader pug -D
     div#app
-        ball
-        //- <button @click="getPosition">获取球1的位置</button>
-        //-<button @click="stop">停止球1的位置</button>
+        ball(v-for="(item,index) in balls" :initial="item.initial" :target="item.target" @input="balls[index]['initial']++")
 </template>
 
 <script>
@@ -16,7 +14,13 @@ export default {
   },
   data(){
     return{
-
+        balls:[{
+            initial:0,
+            target:100
+        },{
+            initial:50,
+            target:200
+        },]
     }
   },
   methods:{

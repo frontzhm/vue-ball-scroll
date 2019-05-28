@@ -6,22 +6,28 @@
 
 export default {
   name: 'Ball',
-
+  props:{
+      initial:{
+        default:0
+      },
+      target:{
+        default:100
+      }
+  },
   data(){
     return{
-      left:0,
-      target:200
     }
   },
   methods:{
   animationFn() {
     var queueID;
     const  _animation = () => {
-      if (this.left >= this.target) {
+      if (this.initial >= this.target) {
         cancelAnimationFrame(queueID);
         return;
       }
-      this.left++;
+    //   this.initial++;
+    this.$emit('input')
       // ！！！！！这里的属性必须写在行内样式里，这里写死了，注意
       // computed自动计算
       cancelAnimationFrame(queueID);
@@ -33,7 +39,7 @@ export default {
   },
   computed:{
     ballStyle(){
-      return `transform:translate(${this.left}px)`
+      return `transform:translate(${this.initial}px)`
     }
   },
   mounted(){
