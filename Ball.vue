@@ -16,25 +16,30 @@ export default {
   },
   data(){
     return{
+        queueID:0
     }
   },
   methods:{
   animationFn() {
-    var queueID;
+    // var queueID;
     const  _animation = () => {
       if (this.initial >= this.target) {
-        cancelAnimationFrame(queueID);
+        cancelAnimationFrame(this.queueID);
         return;
       }
     //   this.initial++;
     this.$emit('input')
       // ！！！！！这里的属性必须写在行内样式里，这里写死了，注意
       // computed自动计算
-      cancelAnimationFrame(queueID);
-      queueID = requestAnimationFrame(_animation);
+      cancelAnimationFrame(this.queueID);
+      this.queueID = requestAnimationFrame(_animation);
     }
     // 首次渲染
     requestAnimationFrame(_animation);
+},
+stopAnimation(){
+    // 因为随时可能要停止动画，所以这个queueID被拿出去了
+    cancelAnimationFrame(this.queueID)
 }
   },
   computed:{
